@@ -1,0 +1,22 @@
+{
+  "name": "hansui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cqqccqc/hansui.git"
+  },
+  "author": "yuanlinzi",
+  "bugs": {
+    "url": "https://github.com/cqqccqc/hansui/issues"
+  },
+  "homepage": "https://github.com/cqqccqc/hansui#readme",
+  "dependencies": {
+    "electron": "^2.0.2"
+  }
+}
