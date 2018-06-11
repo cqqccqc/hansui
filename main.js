@@ -1,20 +1,28 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow, webContents
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ width: 800, height: 600 })
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+    });
 
     // and load the index.html of the app.
     //   mainWindow.loadFile('index.html')
     mainWindow.loadURL('http://localhost:4200/');
+    // mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    // 创建窗体时打开控制台
+    webContents = mainWindow.webContents
+    webContents.openDevTools();
+
+
+    console.log(webContents)
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -22,7 +30,17 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
-    })
+    });
+
+    webContents.on('did-frame-finish-load', function () {
+
+        webContents.executeJavaScript(`
+    let basePath = process.cwd();
+
+    window.__bridge = require(basePath + '/bridge.js');
+    console.info('--executeJavaScript export Object --> ', window.__bridge);
+`);
+    });
 }
 
 // This method will be called when Electron has finished
@@ -49,3 +67,13 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.on('asynchronous-message', (event, arg) => {
+    console.log(arg) // prints "ping"
+    event.sender.send('asynchronous-reply', 'pong')
+})
+
+ipcMain.on('synchronous-message', (event, arg) => {
+    console.log(arg) // prints "ping"
+    event.returnValue = 'pong'
+})

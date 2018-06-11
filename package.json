@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . --debug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/cqqccqc/hansui#readme",
   "dependencies": {
-    "electron": "^2.0.2"
+    "electron": "^2.0.2",
+    "xlsx": "^0.13.0"
   }
 }
