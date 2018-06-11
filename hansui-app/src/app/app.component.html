@@ -1,6 +1,4 @@
 <div>
-    Hello {{title}}
-</div>
-<div>
-    <input type="file"/>
+    <button mat-raised-button color="primary" (click)="onClickFileBtn(file)">选择文件</button>
+    <input type="file" style="display: none" #file (change)="onFileChange(file)" />
 </div>
