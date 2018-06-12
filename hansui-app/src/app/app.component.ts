@@ -10,7 +10,10 @@ import { ExcelService } from './excel.service';
 export class AppComponent {
     showFiller = false;
 
-    constructor(private excelService: ExcelService) { }
+    constructor(
+        private excelService: ExcelService
+    ) {
+    }
 
     ngOninit() {
 
