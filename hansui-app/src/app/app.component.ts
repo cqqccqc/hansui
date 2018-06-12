@@ -8,6 +8,7 @@ import { ExcelService } from './excel.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    showFiller = false;
 
     constructor(private excelService: ExcelService) { }
 

@@ -97,7 +97,7 @@ export class ExcelService {
 
             questions.push(question);
         }
-        console.log(questions)
+        console.log(questions);
         return questions;
     }
 }
