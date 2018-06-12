@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as XLSX from 'xlsx';
+
+import { ExcelService } from './excel.service';
 
 @Component({
     selector: 'app-root',
@@ -7,6 +8,8 @@ import * as XLSX from 'xlsx';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+    constructor(private excelService: ExcelService) { }
 
     ngOninit() {
 
@@ -16,12 +19,12 @@ export class AppComponent {
         file.click();
     }
 
-    onFileChange(file: HTMLInputElement): void {
-        console.log(file);
-        console.log(file.value);
-        if (!file || file.value.indexOf('.xlsx')) {
+    async onFileChange(file: HTMLInputElement) {
+        if (!file || file.value.indexOf('.xlsx') < 0) {
             window.alert('不是excel文件');
             return;
         }
+        const questions = await this.excelService.getQuestionFromExcel(file.files[0]);
+        console.log(questions);
     }
 }

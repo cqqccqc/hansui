@@ -1,4 +1,4 @@
 <div>
-    <button mat-raised-button color="primary" (click)="onClickFileBtn(file)">选择文件</button>
+    <button mat-raised-button color="primary" (click)="onClickFileBtn(file)"  multiple="false">选择文件</button>
     <input type="file" style="display: none" #file (change)="onFileChange(file)" />
 </div>
