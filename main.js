@@ -1,5 +1,14 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, remote } = require('electron')
+const Datastore = require('nedb');
+
+function getUserHome() {
+    return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+const db = new Datastore({
+    autoload: true,
+    filename: getUserHome() + '/.electronapp/hansui/evaluate.db'
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,7 +26,7 @@ function createWindow() {
     mainWindow.loadURL('http://localhost:4200/');
     // mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
 
-    // 创建窗体时打开控制台
+    // open dev tools
     webContents = mainWindow.webContents
     webContents.openDevTools();
 
@@ -32,11 +41,15 @@ function createWindow() {
     webContents.on('did-frame-finish-load', function () {
 
         webContents.executeJavaScript(`
-    let basePath = process.cwd();
-
-    window.__bridge = require(basePath + '/bridge.js');
-    console.info('--executeJavaScript export Object --> ', window.__bridge);
-`);
+        var basePath = process.cwd();
+        var nativeInterface = require(basePath + '/nativeInterface.js');
+        if(window.__bridge){
+            window.__bridge.emit('electron-ready', nativeInterface);
+            console.info('--executeJavaScript export Object --> ', window.__bridge);
+        } else {
+            console.info('--executeJavaScript export Object failed');
+        }
+    `);
     });
 }
 
@@ -65,13 +78,58 @@ app.on('activate', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on('excel-message', (event, arg) => {
-    console.log(arg) // prints "ping"
-    // event.sender.send('asynchronous-reply', 'pong')
+// hanle message to save questions into db
+ipcMain.on('save-questions-message', (event, arg) => {
+    // delete current questions
+    removeAllQuestions().then(() => {
+        // insert new questions
+        return saveQuestions(arg);
+    }).then(() => {
+        event.sender.send('save-questions-message-reply', true);
+    }).catch(e => {
+        event.sender.send('save-questions-message-reply', false);
+    })
+});
 
-})
+function removeAllQuestions() {
+    return new Promise(function (resolve, reject) {
+        db.remove({}, { multi: true }, function (err, numRemoved) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(numRemoved);
+            }
+        });
+    });
+}
+function saveQuestions(questions) {
+    return new Promise(function (resolve, reject) {
+        db.insert(questions, function (err, newDoc) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(newDoc);
+            }
+        });
+    });
+}
 
-ipcMain.on('synchronous-message', (event, arg) => {
-    console.log(arg) // prints "ping"
-    event.returnValue = 'pong'
-})
+ipcMain.on('query-questions-message', (event, arg) => {
+    queryQuestions().then((docs) => {
+        event.sender.send('query-questions-message-reply', docs);
+    }).catch((e) => {
+        event.sender.send('query-questions-message-reply', false);
+    })
+});
+
+function queryQuestions() {
+    return new Promise(function (resolve, reject) {
+        db.find({}, function (err, docs) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(docs);
+            }
+        });
+    });
+}

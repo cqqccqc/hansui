@@ -1,5 +1,5 @@
 export default class Option {
-    id: number;
+    optionID: number;
     content: string;
     isCorrect: boolean;
 }

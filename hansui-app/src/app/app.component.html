@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <button mat-button title="Docs menu" (click)="showFiller = !showFiller">
+        <button mat-button title="Docs menu" (click)="drawer.toggle()">
             <span class="mat-button-wrapper">
                 <mat-icon class="mat-icon" role="img" svgicon="menu" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="0 0 24 24">
@@ -11,23 +11,17 @@
         </button>
     </mat-toolbar-row>
 </mat-toolbar>
-<div>
-    <button mat-raised-button color="primary" (click)="onClickFileBtn(file)" multiple="false">选择文件</button>
-    <input type="file" style="display: none" #file (change)="onFileChange(file)" />
-</div>
-<mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
-        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-            Toggle extra text
-        </button>
+
+<mat-drawer-container class="app-container" autosize>
+    <mat-drawer #drawer class="app-sidenav" mode="side">
+        <button mat-raised-button color="primary" (click)="onClickFileBtn(file)" multiple="false">选择文件</button>
+        <input type="file" style="display: none" #file (change)="onFileChange(file)" />
     </mat-drawer>
 
-    <div class="example-sidenav-content">
-        <button type="button" mat-button (click)="drawer.toggle()">
-            Toggle sidenav
-        </button>
+    <div class="app-sidenav-content">
+
+        <button type="button" mat-raised-button color="warn">导入试题</button>
+        <button type="button" mat-raised-button color="primary">开始测试</button>
     </div>
 
 </mat-drawer-container>

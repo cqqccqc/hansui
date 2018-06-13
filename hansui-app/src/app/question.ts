@@ -1,7 +1,7 @@
 import Option from './option';
 
 export default class Question {
-    id: number;
+    questionID: number;
     question: string;
     isMetaphor: boolean;
     options: Option[];

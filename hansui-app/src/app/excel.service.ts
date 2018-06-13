@@ -14,7 +14,7 @@ export class ExcelService {
 
     constructor() { }
 
-    public async getQuestionFromExcel(excelFile: File) {
+    public async getQuestionFromExcel(excelFile: File): Promise<Question[]> {
         if (!excelFile) {
             return Promise.reject('no excel file');
         }
@@ -28,7 +28,7 @@ export class ExcelService {
         }
     }
 
-    private async readFile(excelFile: File) {
+    private async readFile(excelFile: File): Promise<AOA> {
         if (!excelFile) {
             return Promise.reject('no file');
         }
@@ -74,18 +74,18 @@ export class ExcelService {
             const optionRow = groupedRow[1];
 
             const question = new Question;
-            question.id = parseInt(questionRow[0], 10);
+            question.questionID = parseInt(questionRow[0], 10);
             question.question = questionRow[1];
             question.isMetaphor = questionRow[2] === '是';
 
             const optionOne = new Option;
             const optionTwo = new Option;
 
-            optionOne.id = parseInt(questionRow[3], 10);
+            optionOne.optionID = parseInt(questionRow[3], 10);
             optionOne.content = questionRow[4];
             optionOne.isCorrect = questionRow[5] === '是';
 
-            optionTwo.id = parseInt(optionRow[3], 10);
+            optionTwo.optionID = parseInt(optionRow[3], 10);
             optionTwo.content = optionRow[4];
             optionTwo.isCorrect = optionRow[5] === '是';
 
