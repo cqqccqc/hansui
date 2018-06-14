@@ -1,27 +1,36 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-button title="Docs menu" (click)="drawer.toggle()">
-            <span class="mat-button-wrapper">
-                <mat-icon class="mat-icon" role="img" svgicon="menu" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="0 0 24 24">
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-                    </svg>
-                </mat-icon>
-            </span>
-        </button>
-    </mat-toolbar-row>
-</mat-toolbar>
+<div class="app-root">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <button mat-button title="Docs menu" (click)="drawer.toggle()">
+                <span class="mat-button-wrapper">
+                    <mat-icon class="mat-icon" role="img" svgicon="menu" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="0 0 24 24">
+                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                        </svg>
+                    </mat-icon>
+                </span>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
 
-<mat-drawer-container class="app-container" autosize>
-    <mat-drawer #drawer class="app-sidenav" mode="side">
-        <button mat-raised-button color="primary" (click)="onClickFileBtn(file)" multiple="false">选择文件</button>
-        <input type="file" style="display: none" #file (change)="onFileChange(file)" />
-    </mat-drawer>
+    <mat-drawer-container class="app-container" autosize>
+        <mat-drawer #drawer class="app-sidenav" mode="side">
+            <mat-list>
+                <mat-list-item>
+                    <button type="button" mat-button (click)="navToHome()">主页</button>
+                    <a routerLink="/home">
+                    </a>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <button type="button" mat-button (click)="navToQuestions()">试题</button>
 
-    <div class="app-sidenav-content">
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+        </mat-drawer>
 
-        <button type="button" mat-raised-button color="warn">导入试题</button>
-        <button type="button" mat-raised-button color="primary">开始测试</button>
-    </div>
+        <router-outlet></router-outlet>
 
-</mat-drawer-container>
+    </mat-drawer-container>
+</div>

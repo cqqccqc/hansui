@@ -1,5 +1,6 @@
 export default class Option {
-    optionID: number;
+    _id: string;
+    optionIndex: number;
     content: string;
     isCorrect: boolean;
 }

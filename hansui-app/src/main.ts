@@ -13,6 +13,6 @@ bridge.ready().then(() => {
     platformBrowserDynamic().bootstrapModule(AppModule)
         .catch(err => console.log(err));
 }).catch((err) => {
-    window.alert('请使用electron启动');
+    console.error(err);
 });
 

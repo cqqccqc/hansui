@@ -10,7 +10,8 @@ export class DbService {
     constructor(private ipcService: IpcService) { }
 
     public async queryQuestions(): Promise<Question[]> {
-        return this.ipcService.send('query-questions-message');
+        const resultDoc = await this.ipcService.send('query-questions-message');
+        return resultDoc;
     }
 
     public async saveQuestions(questions: Question[]): Promise<boolean> {

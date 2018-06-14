@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { ExcelService } from './excel.service';
 import { DbService } from './db.service';
 import Question from './question';
 
@@ -13,9 +13,9 @@ export class AppComponent implements OnInit {
     questions: Question[];
 
     constructor(
-        private excelService: ExcelService,
-        private dbService: DbService) {
-    }
+        private dbService: DbService,
+        private router: Router
+    ) { }
 
     async ngOnInit() {
         // 初始化的时候去本地数据库获取数据
@@ -23,24 +23,11 @@ export class AppComponent implements OnInit {
         console.log(this.questions);
     }
 
-    onClickFileBtn(file: HTMLInputElement): void {
-        file.click();
+    navToHome() {
+        this.router.navigate(['/home']);
     }
 
-    async onFileChange(file: HTMLInputElement) {
-        if (!file || file.value.indexOf('.xlsx') < 0) {
-            window.alert('不是excel文件');
-            return;
-        }
-        this.questions = await this.excelService.getQuestionFromExcel(file.files[0]);
-        try {
-            // save into local db
-            const result = await this.dbService.saveQuestions(this.questions);
-            console.log(result);
-        } catch (e) {
-            console.error(e);
-        } finally {
-            file.value = null;
-        }
+    navToQuestions() {
+        this.router.navigate(['/questions']);
     }
 }

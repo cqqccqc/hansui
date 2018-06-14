@@ -93,7 +93,7 @@ ipcMain.on('save-questions-message', (event, arg) => {
 
 function removeAllQuestions() {
     return new Promise(function (resolve, reject) {
-        db.remove({}, { multi: true }, function (err, numRemoved) {
+        db.remove({ type: 'questions' }, { multi: true }, function (err, numRemoved) {
             if (err) {
                 reject(err);
             } else {
@@ -124,7 +124,7 @@ ipcMain.on('query-questions-message', (event, arg) => {
 
 function queryQuestions() {
     return new Promise(function (resolve, reject) {
-        db.find({}, function (err, docs) {
+        db.find({ type: 'questions' }, function (err, docs) {
             if (err) {
                 reject(err);
             } else {
