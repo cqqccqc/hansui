@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { ExcelService } from '../excel.service';
 import { DbService } from '../db.service';
+import Question from '../question';
+import { QuestionService } from '../question.service';
 
 @Component({
     selector: 'app-home',
@@ -10,12 +12,19 @@ import { DbService } from '../db.service';
 })
 export class HomeComponent implements OnInit {
 
+    questions: Question[] = [];
+
     constructor(
+        private questionService: QuestionService,
         private excelService: ExcelService,
         private dbService: DbService
     ) { }
 
     ngOnInit() {
+        this.questionService.questions$.subscribe(questions => {
+            this.questions = questions;
+        });
+        this.questionService.queryQuestions();
     }
 
     onClickFileBtn(file: HTMLInputElement): void {

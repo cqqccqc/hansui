@@ -116,9 +116,13 @@ function saveQuestions(questions) {
 
 ipcMain.on('query-questions-message', (event, arg) => {
     queryQuestions().then((docs) => {
-        event.sender.send('query-questions-message-reply', docs);
+        if (docs.length > 0) {
+            event.sender.send('query-questions-message-reply', docs[0]);
+        } else {
+            event.sender.send('query-questions-message-reply', []);
+        }
     }).catch((e) => {
-        event.sender.send('query-questions-message-reply', false);
+        event.sender.send('query-questions-message-reply', []);
     })
 });
 

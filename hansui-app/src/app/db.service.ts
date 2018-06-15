@@ -11,7 +11,11 @@ export class DbService {
 
     public async queryQuestions(): Promise<Question[]> {
         const resultDoc = await this.ipcService.send('query-questions-message');
-        return resultDoc;
+        if (resultDoc && resultDoc._id) {
+            return resultDoc.questions;
+        } else {
+            return [];
+        }
     }
 
     public async saveQuestions(questions: Question[]): Promise<boolean> {
