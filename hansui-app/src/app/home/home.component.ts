@@ -4,6 +4,8 @@ import { ExcelService } from '../excel.service';
 import { DbService } from '../db.service';
 import Question from '../question';
 import { QuestionService } from '../question.service';
+import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -17,12 +19,14 @@ export class HomeComponent implements OnInit {
     constructor(
         private questionService: QuestionService,
         private excelService: ExcelService,
-        private dbService: DbService
+        private dbService: DbService,
+        private router: Router
     ) { }
 
     ngOnInit() {
+        const self = this;
         this.questionService.questions$.subscribe(questions => {
-            this.questions = questions;
+            self.questions = questions;
         });
         this.questionService.queryQuestions();
     }
@@ -46,5 +50,9 @@ export class HomeComponent implements OnInit {
         } finally {
             file.value = null;
         }
+    }
+
+    onCLickEvaluate() {
+        this.router.navigate(['/evaluate']);
     }
 }

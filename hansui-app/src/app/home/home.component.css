@@ -1,0 +1,11 @@
+.home-container{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.home-btn{
+    height: 50px;
+    width: 150px;
+    font-size: 20px;
+}

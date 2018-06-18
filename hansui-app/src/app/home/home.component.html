@@ -1,3 +1,5 @@
-<button type="button" mat-raised-button color="warn" (click)="onClickFileBtn(file)" *ngIf="questions.length<=0">导入试题</button>
-<input type="file" style="display: none" #file (change)="onFileChange(file)" multiple="false" />
-<button type="button" mat-raised-button color="primary">开始测试</button>
+<div class="home-container">
+    <button class="home-btn" type="button" mat-raised-button color="warn" (click)="onClickFileBtn(file)" *ngIf="questions.length<=0">导入试题</button>
+    <input type="file" style="display: none" #file (change)="onFileChange(file)" multiple="false" />
+    <button class="home-btn" type="button" mat-raised-button color="primary" (click)="onCLickEvaluate()">开始测试</button>
+</div>

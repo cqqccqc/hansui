@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { QuestionService } from './question.service';
-import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -10,13 +9,15 @@ import { Observable, of } from 'rxjs';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+    testing: Boolean = false;
 
     constructor(
+        private questionService: QuestionService,
         private router: Router
     ) { }
 
-    async ngOnInit() {
-
+    ngOnInit() {
+        this.questionService.queryQuestions();
     }
 
     navToHome() {

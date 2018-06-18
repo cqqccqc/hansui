@@ -1,0 +1,21 @@
+<div ng-if="questions.length>0" class="evaluate-container">
+    <mat-card class="evaluate-card" *ngFor="let question of questions; index as i" [class.current]="i===currentIndex">
+        <mat-card-header>
+            <!-- <div mat-card-avatar class="evaluate-header-image"></div> -->
+            <mat-card-title>{{i+1}} {{question.question}}</mat-card-title>
+            <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <mat-radio-group class="evaluate-radio-group">
+                <mat-radio-button class="evaluate-radio-button" *ngFor="let option of question.options">
+                    {{option.content}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="warn">下一题</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
