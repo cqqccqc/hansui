@@ -11,6 +11,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 import { AppRoutingModule } from './/app-routing.module';
 
@@ -38,6 +41,8 @@ import { EvaluateComponent } from './evaluate/evaluate.component';
         MatDividerModule,
         MatCardModule,
         MatRadioModule,
+        MatFormFieldModule,
+        MatInputModule,
 
         AppRoutingModule
     ],

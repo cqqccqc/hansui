@@ -4,7 +4,7 @@ import { ExcelService } from '../excel.service';
 import { DbService } from '../db.service';
 import Question from '../question';
 import { QuestionService } from '../question.service';
-import { ThrowStmt } from '@angular/compiler';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,13 +15,20 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
     questions: Question[] = [];
+    testerGroup: FormGroup;
 
     constructor(
+        private fb: FormBuilder,
         private questionService: QuestionService,
         private excelService: ExcelService,
         private dbService: DbService,
         private router: Router
-    ) { }
+    ) {
+        this.testerGroup = fb.group({
+            hideRequired: false,
+            floatLabel: 'auto',
+        });
+    }
 
     ngOnInit() {
         const self = this;

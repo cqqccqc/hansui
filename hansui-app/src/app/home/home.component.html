@@ -1,5 +1,22 @@
 <div class="home-container">
     <button class="home-btn" type="button" mat-raised-button color="warn" (click)="onClickFileBtn(file)" *ngIf="questions.length<=0">导入试题</button>
     <input type="file" style="display: none" #file (change)="onFileChange(file)" multiple="false" />
-    <button class="home-btn" type="button" mat-raised-button color="primary" (click)="onCLickEvaluate()">开始测试</button>
+
+    <form class="home-form" *ngIf="questions.length>0" [formGroup]="testerGroup">
+        <mat-form-field>
+            <input matInput placeholder="姓名">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="年龄">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-radio-group formControlName="floatLabel">
+                <mat-radio-button value="1">男</mat-radio-button>
+                <mat-radio-button value="2">女</mat-radio-button>
+            </mat-radio-group>
+        </mat-form-field>
+        <button class="home-btn" type="button" mat-raised-button color="primary" (click)="onCLickEvaluate()">开始测试</button>
+    </form>
 </div>
