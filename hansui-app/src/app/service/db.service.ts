@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Question from './question';
+import Question from '../entity/question';
 import { IpcService } from './ipc.service';
 
 @Injectable({

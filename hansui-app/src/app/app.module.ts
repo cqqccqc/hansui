@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,9 +14,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { QuestionsComponent } from './questions/questions.component';
@@ -30,6 +32,7 @@ import { EvaluateComponent } from './evaluate/evaluate.component';
         EvaluateComponent,
     ],
     imports: [
+        FormsModule,
         BrowserModule,
         BrowserAnimationsModule,
 
@@ -43,6 +46,7 @@ import { EvaluateComponent } from './evaluate/evaluate.component';
         MatRadioModule,
         MatFormFieldModule,
         MatInputModule,
+        MatSelectModule,
 
         AppRoutingModule
     ],

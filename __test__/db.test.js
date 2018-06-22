@@ -116,12 +116,18 @@ test('query questions from db', () => {
 
 const mockTester = {
     type: 'tester',
-    testerID: Math.random(),
+    testerIndex: 1,
+    name: 'testerName',
+    gender: 'MALE',
+    age: 20,
+    startTime: 0,
+    endTime: 0,
     remark: '',
+    interval: 60, // 每题间隔时间
     answers: [
         {
             questionIndex: 1,
-            optionIndex: 1,
+            optionIndex: null,
             startTime: 0,
             endTime: 9999
         },

@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { IpcService } from '../app/ipc.service';
+import { IpcService } from '../../app/service/ipc.service';
 
 describe('IpcService', () => {
   beforeEach(() => {

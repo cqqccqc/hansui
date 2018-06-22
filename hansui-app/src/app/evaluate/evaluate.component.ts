@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import Question from '../question';
-import { QuestionService } from '../question.service';
+import Question from '../entity/question';
+import { QuestionService } from '../service/question.service';
+import Tester from '../entity/tester';
+import { TesterService } from '../service/tester.service';
 
 
 @Component({
@@ -16,8 +18,11 @@ export class EvaluateComponent implements OnInit {
 
     testing = false;
 
+    tester: Tester;
+
     constructor(
         private questionService: QuestionService,
+        private testerService: TesterService
     ) { }
 
     ngOnInit() {
@@ -27,6 +32,8 @@ export class EvaluateComponent implements OnInit {
             console.log(self.questions);
         });
         this.questionService.queryQuestions();
+        this.tester = this.testerService.tester;
+        console.log(this.tester);
     }
 
 

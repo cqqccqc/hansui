@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { QuestionService } from './question.service';
+import { QuestionService } from './service/question.service';
 
 @Component({
     selector: 'app-root',

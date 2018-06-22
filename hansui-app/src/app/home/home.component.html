@@ -2,21 +2,24 @@
     <button class="home-btn" type="button" mat-raised-button color="warn" (click)="onClickFileBtn(file)" *ngIf="questions.length<=0">导入试题</button>
     <input type="file" style="display: none" #file (change)="onFileChange(file)" multiple="false" />
 
-    <form class="home-form" *ngIf="questions.length>0" [formGroup]="testerGroup">
+    <form class="home-form" *ngIf="questions.length>0" #testerFrom="ngForm">
         <mat-form-field>
-            <input matInput placeholder="姓名">
+            <input matInput placeholder="姓名" required name="name" id="name" #name [(ngModel)]="tester.name">
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="年龄">
+            <input matInput placeholder="年龄" required name="age" id="age" #age [(ngModel)]="tester.age">
         </mat-form-field>
-
-        <mat-form-field>
-            <mat-radio-group formControlName="floatLabel">
-                <mat-radio-button value="1">男</mat-radio-button>
-                <mat-radio-button value="2">女</mat-radio-button>
+        <div class="mat-form-field-wrapper">
+            <mat-radio-group required name="gender" id="gender" #gender [(ngModel)]="tester.gender">
+                <mat-radio-button value="MALE">男</mat-radio-button>
+                <mat-radio-button value="FAMALE">女</mat-radio-button>
             </mat-radio-group>
+        </div>
+        <mat-form-field>
+            <span matSuffix>毫秒 &nbsp;</span>
+            <input matInput type="number" placeholder="测试时间" required name="interval" id="interval" #interval [(ngModel)]="tester.interval">
         </mat-form-field>
-        <button class="home-btn" type="button" mat-raised-button color="primary" (click)="onCLickEvaluate()">开始测试</button>
+        <button class="home-btn" type="button" mat-raised-button color="primary" (click)="onClickEvaluate()">开始测试</button>
     </form>
 </div>

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 
 import { AOA, ExcelReader } from './excelReader';
-import Question from './question';
-import Option from './option';
+import Question from '../entity/question';
+import Option from '../entity/option';
 
 @Injectable({
     providedIn: 'root'

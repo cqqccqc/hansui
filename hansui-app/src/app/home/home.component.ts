@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExcelService } from '../excel.service';
-import { DbService } from '../db.service';
-import Question from '../question';
-import { QuestionService } from '../question.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ExcelService } from '../service/excel.service';
+import { DbService } from '../service/db.service';
+import Question from '../entity/question';
+import { QuestionService } from '../service/question.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Tester from '../entity/tester';
+import { TesterService } from '../service/tester.service';
+
+
+const INTERVAL = 10 * 1e3;
 
 @Component({
     selector: 'app-home',
@@ -15,19 +20,15 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
     questions: Question[] = [];
-    testerGroup: FormGroup;
+    tester: Tester = new Tester('', undefined, '', INTERVAL);
 
     constructor(
-        private fb: FormBuilder,
         private questionService: QuestionService,
         private excelService: ExcelService,
         private dbService: DbService,
+        private testerService: TesterService,
         private router: Router
     ) {
-        this.testerGroup = fb.group({
-            hideRequired: false,
-            floatLabel: 'auto',
-        });
     }
 
     ngOnInit() {
@@ -59,7 +60,15 @@ export class HomeComponent implements OnInit {
         }
     }
 
-    onCLickEvaluate() {
+    onClickEvaluate() {
+        // 校验
+        // 规整tester
+        this.tester.startTime = new Date().valueOf();
+        const tester = this.tester;
+        this.testerService.tester = tester;
+
+        // 恢复
+        this.tester = new Tester('', undefined, '', INTERVAL);
         this.router.navigate(['/evaluate']);
     }
 }

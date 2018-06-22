@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import Question from '../question';
-import { QuestionService } from '../question.service';
+import Question from '../entity/question';
+import { QuestionService } from '../service/question.service';
 
 @Component({
     selector: 'app-questions',

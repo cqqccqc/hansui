@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subscription, of, Subject, from } from 'rxjs';
 
-import Question from './question';
+import Question from '../entity/question';
 import { DbService } from './db.service';
 
 @Injectable({
