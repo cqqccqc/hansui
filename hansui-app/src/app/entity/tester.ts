@@ -1,3 +1,5 @@
+import Answer from './answer';
+
 export default class Tester {
     testerIndex: number;
     name: string;
@@ -7,6 +9,7 @@ export default class Tester {
     endTime: number;
     remark: string;
     interval: number; // 每题间隔时间
+    answers: Answer[];
 
     constructor(name: string, age: number, gender: string, interval: number) {
         this.name = name;

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +35,7 @@ import { EvaluateComponent } from './evaluate/evaluate.component';
         FormsModule,
         BrowserModule,
         BrowserAnimationsModule,
+        CommonModule,
 
         MatButtonModule,
         MatToolbarModule,

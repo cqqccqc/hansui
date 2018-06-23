@@ -62,8 +62,6 @@ export class HomeComponent implements OnInit {
 
     onClickEvaluate() {
         // 校验
-        // 规整tester
-        this.tester.startTime = new Date().valueOf();
         const tester = this.tester;
         this.testerService.tester = tester;
 

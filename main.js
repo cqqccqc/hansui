@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, remote } = require('electron')
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
+const fs = require('fs');
+
 const Datastore = require('nedb');
 
 function getUserHome() {
@@ -19,16 +21,19 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     // and load the index.html of the app.
     //   mainWindow.loadFile('index.html')
-    mainWindow.loadURL('http://localhost:4200/');
-    // mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
+    // mainWindow.loadURL('http://localhost:4200/');
+    mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
 
     // open dev tools
     webContents = mainWindow.webContents
-    webContents.openDevTools();
+    // webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -41,8 +46,9 @@ function createWindow() {
     webContents.on('did-frame-finish-load', function () {
 
         webContents.executeJavaScript(`
-        var basePath = process.cwd();
-        var nativeInterface = require(basePath + '/nativeInterface.js');
+        var fs = require('fs');
+        var { ipcRenderer } = require('electron');
+        var nativeInterface = { fs, ipcRenderer }
         if(window.__bridge){
             window.__bridge.emit('electron-ready', nativeInterface);
             console.info('--executeJavaScript export Object --> ', window.__bridge);
