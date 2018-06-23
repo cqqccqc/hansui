@@ -157,37 +157,37 @@ function queryAll() {
     });
 }
 
-test('remove all data', () => {
-    return removeAllData().then(numRemoved => {
-        expect(numRemoved).toBeGreaterThanOrEqual(0);
-    });
-});
+// test('remove all data', () => {
+//     return removeAllData().then(numRemoved => {
+//         expect(numRemoved).toBeGreaterThanOrEqual(0);
+//     });
+// });
 
-test('save questions into db', () => {
-    return saveQuestions().then(data => {
-        expect(data['questions']).toBeInstanceOf(Array);
-    });
-});
+// test('save questions into db', () => {
+//     return saveQuestions().then(data => {
+//         expect(data['questions']).toBeInstanceOf(Array);
+//     });
+// });
 
-test('query questions from db', () => {
-    return queryQuestions().then(data => {
-        console.log(data);
-        expect(data).toBeInstanceOf(Array);
-    })
-});
+// test('query questions from db', () => {
+//     return queryQuestions().then(data => {
+//         console.log(data);
+//         expect(data).toBeInstanceOf(Array);
+//     })
+// });
 
-test('save tester into db', () => {
-    return saveTester().then(data => {
-        expect(data['answers']).toBeInstanceOf(Array);
-    });
-});
+// test('save tester into db', () => {
+//     return saveTester().then(data => {
+//         expect(data['answers']).toBeInstanceOf(Array);
+//     });
+// });
 
-test('query testers from db', () => {
-    return queryTesters().then(data => {
-        console.log(data);
-        expect(data).toBeInstanceOf(Array);
-    })
-});
+// test('query testers from db', () => {
+//     return queryTesters().then(data => {
+//         console.log(data);
+//         expect(data).toBeInstanceOf(Array);
+//     })
+// });
 
 test('query all from db', () => {
     return queryAll().then(data => {

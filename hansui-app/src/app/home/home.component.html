@@ -1,6 +1,5 @@
 <div class="home-container">
-    <button class="home-btn" type="button" mat-raised-button color="warn" (click)="onClickFileBtn(file)" *ngIf="questions.length<=0">导入试题</button>
-    <input type="file" style="display: none" #file (change)="onFileChange(file)" multiple="false" />
+    <p *ngIf="questions.length<=0">没有试题，请打开左侧导航，选择测试题目页面导入</p>
 
     <form class="home-form" *ngIf="questions.length>0" #testerFrom="ngForm">
         <mat-form-field>

@@ -1,3 +1,6 @@
-<p>
-  testers works!
-</p>
+<mat-list role="list">
+  <ng-container *ngFor="let tester of testers">
+    <mat-list-item role="listitem">{{tester.name}}</mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>

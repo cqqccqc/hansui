@@ -150,7 +150,7 @@ function queryQuestions() {
 
 ipcMain.on('save-tester-message', (event, arg) => {
     const tester = arg;
-    test.type = 'tester';
+    tester.type = 'tester';
     saveTester(tester).then((newDoc) => {
         console.log(newDoc);
         event.sender.send('save-tester-message-reply', true);

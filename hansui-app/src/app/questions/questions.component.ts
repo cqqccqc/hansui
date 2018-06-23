@@ -42,7 +42,7 @@ export class QuestionsComponent implements OnInit {
         try {
             // save into local db
             const result = await this.dbService.saveQuestions(questions);
-            console.log(result);
+            this.questionService.queryQuestions();
         } catch (e) {
             console.error(e);
         } finally {
