@@ -28,8 +28,8 @@ function createWindow() {
 
     // and load the index.html of the app.
     //   mainWindow.loadFile('index.html')
-    mainWindow.loadURL('http://localhost:4200/');
-    // mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
+    // mainWindow.loadURL('http://localhost:4200/');
+    mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
 
     // open dev tools
     webContents = mainWindow.webContents
