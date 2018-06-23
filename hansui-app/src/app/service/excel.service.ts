@@ -21,7 +21,7 @@ export class ExcelService {
         try {
             const jsonData = await this.readFile(excelFile);
             this.questions = this.mapToQuestion(jsonData);
-            return Promise.resolve(this.questions);
+            return this.questions;
         } catch (e) {
             console.error(e);
             return Promise.reject(e);
@@ -45,7 +45,7 @@ export class ExcelService {
         /* save data */
         const jsonData = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
         console.log(jsonData);
-        return Promise.resolve(jsonData);
+        return jsonData;
     }
 
     private mapToQuestion(json: AOA): Question[] {

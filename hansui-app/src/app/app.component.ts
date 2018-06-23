@@ -27,4 +27,8 @@ export class AppComponent implements OnInit {
     navToQuestions() {
         this.router.navigate(['/questions']);
     }
+
+    navToTesters() {
+        this.router.navigate(['/testers']);
+    }
 }

@@ -1,28 +1,32 @@
-<h6>题目：</h6>
+<div class="home-container">
+    <button class="home-btn" type="button" mat-raised-button color="warn" (click)="onClickFileBtn(file)">导入试题</button>
+    <input type="file" style="display: none" #file (change)="onFileChange(file)" multiple="false" />
 
-<table>
-    <thead>
-        <tr>
-            <th>题目序号</th>
-            <th>习语</th>
-            <th>mapping/ metaphors</th>
-            <th colspan="3">选项</th>
-        </tr>
-        <tr>
-            <th colspan="3">123</th>
-            <th>选项序号</th>
-            <th>选项内容</th>
-            <th>是否正确答案</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let question of questions">
-            <td rowspan="2">{{question.questionIndex}}</td>
-            <td rowspan="2">{{question.question}}</td>
-            <td rowspan="2">{{question.isMetaphors}}</td>
-            <td>123</td>
-            <td>123</td>
-            <td>321</td>
-        </tr>
-    </tbody>
-</table>
+
+    <table>
+        <thead>
+            <tr>
+                <th>题目序号</th>
+                <th>习语</th>
+                <th>mapping/ metaphors</th>
+                <th colspan="3">选项</th>
+            </tr>
+            <tr>
+                <th colspan="3">123</th>
+                <th>选项序号</th>
+                <th>选项内容</th>
+                <th>是否正确答案</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let question of questions">
+                <td rowspan="2">{{question.questionIndex}}</td>
+                <td rowspan="2">{{question.question}}</td>
+                <td rowspan="2">{{question.isMetaphors}}</td>
+                <td>123</td>
+                <td>123</td>
+                <td>321</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

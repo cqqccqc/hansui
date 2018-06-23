@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const fs = require('fs');
 
 const Datastore = require('nedb');
@@ -28,8 +28,8 @@ function createWindow() {
 
     // and load the index.html of the app.
     //   mainWindow.loadFile('index.html')
-    // mainWindow.loadURL('http://localhost:4200/');
-    mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
+    mainWindow.loadURL('http://localhost:4200/');
+    // mainWindow.loadFile('./hansui-app/dist/hansui-app/index.html')
 
     // open dev tools
     webContents = mainWindow.webContents
@@ -89,7 +89,11 @@ ipcMain.on('save-questions-message', (event, arg) => {
     // delete current questions
     removeAllQuestions().then(() => {
         // insert new questions
-        return saveQuestions(arg);
+        var questionEntity = {
+            type: 'questions',
+            questions: arg
+        };
+        return saveQuestions(questionEntity);
     }).then(() => {
         event.sender.send('save-questions-message-reply', true);
     }).catch(e => {
@@ -138,6 +142,51 @@ function queryQuestions() {
             if (err) {
                 reject(err);
             } else {
+                resolve(docs);
+            }
+        });
+    });
+}
+
+ipcMain.on('save-tester-message', (event, arg) => {
+    const tester = arg;
+    test.type = 'tester';
+    saveTester(tester).then((newDoc) => {
+        console.log(newDoc);
+        event.sender.send('save-tester-message-reply', true);
+    }).catch(e => {
+        event.sender.send('save-tester-message-reply', false);
+    })
+});
+
+function saveTester(tester) {
+    return new Promise(function (resolve, reject) {
+        db.insert(tester, function (err, newDoc) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(newDoc);
+            }
+        });
+    });
+}
+
+ipcMain.on('query-testers-message', (event, arg) => {
+    queryTesters().then((docs) => {
+        console.log(docs);
+        event.sender.send('query-testers-message-reply', docs);
+    }).catch(e => {
+        event.sender.send('query-testers-message-reply', []);
+    })
+});
+
+function queryTesters() {
+    return new Promise(function (resolve, reject) {
+        db.find({ type: 'tester' }, function (err, docs) {
+            if (err) {
+                reject(err);
+            } else {
+                console.log(docs)
                 resolve(docs);
             }
         });

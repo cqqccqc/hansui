@@ -8,12 +8,6 @@ const db = new Datastore({
     filename: getUserHome() + '/.electronapp/hansui/evaluate.db'
 });
 
-test('remove all data', () => {
-    return removeAllData().then(numRemoved => {
-        expect(numRemoved).toBeGreaterThanOrEqual(0);
-    });
-});
-
 function removeAllData() {
     // remove all data
     return new Promise(function (resolve, reject) {
@@ -69,12 +63,6 @@ const mockQuestions = {
     ]
 };
 
-/*
- * // remove all data
-        db.remove({ type: 'questions' }, { multi: true }, function (err, numRemoved) {
-            
-        });
- */
 
 function saveQuestions() {
     return new Promise(function (resolve, reject) {
@@ -100,19 +88,6 @@ function queryQuestions() {
         });
     });
 }
-
-test('save questions into db', () => {
-    return saveQuestions().then(data => {
-        expect(data['questions']).toBeInstanceOf(Array);
-    });
-});
-
-test('query questions from db', () => {
-    return queryQuestions().then(data => {
-        console.log(data);
-        expect(data).toBeInstanceOf(Array);
-    })
-});
 
 const mockTester = {
     type: 'tester',
@@ -170,6 +145,37 @@ function queryTesters() {
     });
 }
 
+function queryAll() {
+    return new Promise(function (resolve, reject) {
+        db.find({}, function (err, docs) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(docs);
+            }
+        });
+    });
+}
+
+test('remove all data', () => {
+    return removeAllData().then(numRemoved => {
+        expect(numRemoved).toBeGreaterThanOrEqual(0);
+    });
+});
+
+test('save questions into db', () => {
+    return saveQuestions().then(data => {
+        expect(data['questions']).toBeInstanceOf(Array);
+    });
+});
+
+test('query questions from db', () => {
+    return queryQuestions().then(data => {
+        console.log(data);
+        expect(data).toBeInstanceOf(Array);
+    })
+});
+
 test('save tester into db', () => {
     return saveTester().then(data => {
         expect(data['answers']).toBeInstanceOf(Array);
@@ -182,3 +188,10 @@ test('query testers from db', () => {
         expect(data).toBeInstanceOf(Array);
     })
 });
+
+test('query all from db', () => {
+    return queryAll().then(data => {
+        console.log(data);
+        expect(data).toBeInstanceOf(Array);
+    })
+})

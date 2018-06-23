@@ -1,7 +1,7 @@
 import Answer from './answer';
 
 export default class Tester {
-    testerIndex: number;
+    _id: string;
     name: string;
     gender: string;
     age: number;

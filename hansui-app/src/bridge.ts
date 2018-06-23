@@ -13,8 +13,8 @@ class Bridge extends EventEmitter {
     ready() {
         const self = this;
         return new Promise(function (resolve, reject) {
-            // ua中 不带app名称 hansui， 则认为不是electron环境
-            if (window.navigator.userAgent.indexOf('hansui') < 0) {
+            // ua中不带Electron， 则认为不是electron环境
+            if (window.navigator.userAgent.toLowerCase().indexOf('electron') < 0) {
                 reject(new Error('not in electron'));
                 return;
             }

@@ -23,6 +23,7 @@ import { AppComponent } from './app.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { HomeComponent } from './home/home.component';
 import { EvaluateComponent } from './evaluate/evaluate.component';
+import { TestersComponent } from './testers/testers.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { EvaluateComponent } from './evaluate/evaluate.component';
         QuestionsComponent,
         HomeComponent,
         EvaluateComponent,
+        TestersComponent,
     ],
     imports: [
         FormsModule,
